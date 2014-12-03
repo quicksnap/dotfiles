@@ -1,0 +1,125 @@
+editalias() {
+  subl -nw ~/.aliases && . ~/.aliases
+}
+
+alias g4upstream="P4CLIENT=fresh_and_clean g4 submit"
+
+alias nower="npm i && bower i"
+alias gs='git status'
+
+alias nw="/Applications/node-webkit.app/Contents/MacOS/node-webkit"
+
+alias ,="subl ."
+
+alias zshrc="subl ~/.zshrc"
+
+alias aliases="editalias"
+
+alias g4="git p4"
+
+alias g4s="git p4 submit --prepare-p4-only"
+
+portbuild() {
+  read 'foobar?DID YOU SUBMIT TO P4??';
+  sudo true;
+  cd /Users/dan/projects/portfolio/dam-server/;
+  ant;
+  cd build/dist;
+  sudo ./mac-devtools.sh remove delete_db install;
+  popd;
+  popd;
+}
+
+portbuildbig() {
+  read 'foobar?DID YOU SUBMIT TO P4??';
+  sudo true;
+  cd /Users/dan/projects/portfolio/dam-server/;
+  cd /Users/dan/projects/portfolio/dam-server/client/client-library && ant;
+  popd;
+  cd /Users/dan/projects/portfolio/dam-server/;
+  ant;
+  cd build/dist;
+  sudo ./mac-devtools.sh remove delete_db install;
+  popd;
+  popd;
+}
+
+alias posty="cd; post-review -o default; popd;"
+
+alias damster="~/projects/portfolio/dam-server/client/damster/build/dist/damster.sh"
+
+alias ll="ls -alh"
+
+alias getlatest="p4 sync /Users/dan/projects/p4/danschuman_perforce/ExtensisSource/dev/portfolio/...#head"
+
+update_jars() {
+  sudo true;
+  damster -adminlogin
+  damster -stopserver;
+  sleep 5;
+  cd /Users/dan/projects/portfolio/dam-server/;
+  ant jar;
+  popd;
+  cd /Users/dan/projects/portfolio/dam-server/build/dist/;
+  ./mac-devtools.sh update_jboss_jars;
+  popd
+  damster -startserver;
+}
+
+update_ear() {
+  sudo true;
+  damster -adminlogin;
+  damster -stopserver;
+  sleep 5;
+  cd /Users/dan/projects/portfolio/dam-server/;
+  ant ear;
+  sleep 10;
+  sudo rm /Applications/Extensis/Portfolio\ Server/applications/jboss/standalone/deployments/portfolio.ear;
+  sudo cp -rf /Users/dan/projects/portfolio/dam-server/build/portfolio.ear /Applications/Extensis/Portfolio\ Server/applications/jboss/standalone/deployments/portfolio.ear;
+  damster -startserver;
+  popd;
+}
+
+_update_ear_nobuild() {
+  sudo true;
+  damster -adminlogin
+  damster -stopserver;
+  sleep 5;
+  cd /Users/dan/projects/portfolio/dam-server/;
+  # ant ear;
+  sudo rm /Applications/Extensis/Portfolio\ Server/applications/jboss/standalone/deployments/portfolio.ear;
+  sudo cp -rf /Users/dan/projects/portfolio/dam-server/build/portfolio.ear /Applications/Extensis/Portfolio\ Server/applications/jboss/standalone/deployments/portfolio.ear;
+  damster -startserver;
+  popd;
+}
+
+mdevtools() {
+  sudo true;
+  cd /Users/dan/projects/portfolio/dam-server/build/dist;
+  ./mac-devtools.sh $@;
+  popd;
+}
+
+alias fuckyou="echo 'No, fuck you.'"
+
+alias fuck="echo FUCK"
+
+alias uh="echo Think harder..."
+
+alias monkey="ssh -t dan@2dot3.com tmux a -d"
+
+alias subl.="subl ."
+
+alias ....="../.."
+alias .....="../../.."
+alias ......="../../.."
+alias .......="../../../.."
+alias ........="../../../.."
+alias .........="../../../../.."
+alias ..........="../../../../.."
+alias ...........="../../../../../.."
+alias ............="../../../../../.."
+alias .............="../../../../../../.."
+alias ..............="../../../../../../.."
+alias ...............="../../../../../../../.."
+alias ................="../../../../../../../.."

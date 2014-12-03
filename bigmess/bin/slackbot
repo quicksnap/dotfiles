@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'shellwords'
+
+puts system( "curl --data \"#{ARGV[1]}\" \"https://extensis.slack.com/services/hooks/slackbot\?token\=9S8JusDZiFbcxsf9c2Nc7ETc\&channel\=%23#{Shellwords.shellescape(ARGV[0])}\"" )
+
+

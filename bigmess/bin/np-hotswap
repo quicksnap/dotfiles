@@ -1,0 +1,40 @@
+#!/bin/bash
+set -e
+
+export DEV_BRANCH=dev/portfolio
+export RELEASE_BRANCH=release/Portfolio1.0.0
+
+export BRANCH="$DEV_BRANCH"
+
+export PUBLISH_HOME=/Work/ExtensisSource/"$BRANCH"/dam-server/client/publish-form
+export PORT_BUILD=/Work/ExtensisSource/"$BRANCH"/dam-server/build
+export DAMSTER=/Work/ExtensisSource/"$BRANCH"/dam-server/client/damster/build/dist/damster.sh
+export EAR_DIR=/Applications/Extensis/Portfolio\ Server/applications/jboss/standalone/deployments
+
+$DAMSTER -adminlogin;
+$DAMSTER -stopserver;
+
+cd "$PUBLISH_HOME";
+gulp dist;
+
+cd "$PORT_BUILD";
+mkdir explode && cd explode;
+jar xf ../portfolio.ear;
+mkdir explode && cd explode;
+jar xf ../portfolio.war;
+rm -rf publishsite;
+cp -R "$PUBLISH_HOME/dist" publishsite;
+rm ../portfolio.war;
+jar cf ../portfolio.war *;
+cd ..;
+rm -rf explode;
+rm ../portfolio.ear;
+jar cf ../portfolio.ear *;
+cd ..;
+rm -rf explode;
+cd "$EAR_DIR";
+rm -f portfolio.ear;
+cp "$PORT_BUILD/portfolio.ear" .;
+sleep 2;
+$DAMSTER -startserver;
+
