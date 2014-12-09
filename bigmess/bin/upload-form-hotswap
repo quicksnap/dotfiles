@@ -1,20 +1,20 @@
 #!/bin/bash
+
+# Swaps out the upload form into the ear, restarts the server
+
 set -e
 
-export DEV_BRANCH=dev/portfolio
-export RELEASE_BRANCH=release/Portfolio1.0.0
-
-export BRANCH="$DEV_BRANCH"
-
-export PUBLISH_HOME=/Work/ExtensisSource/"$BRANCH"/dam-server/client/publish-form
-export PORT_BUILD=/Work/ExtensisSource/"$BRANCH"/dam-server/build
-export DAMSTER=/Work/ExtensisSource/"$BRANCH"/dam-server/client/damster/build/dist/damster.sh
+export PORTFOLIO_HOME=/Users/dan/projects/portfolio
+export UPLOAD_FORM_HOME="$PORTFOLIO_HOME"/dam-server/client/publish-form
+export PORT_BUILD="$PORTFOLIO_HOME"/dam-server/build
+export DAMSTER="$PORTFOLIO_HOME"/dam-server/client/damster/build/dist/damster.sh
 export EAR_DIR=/Applications/Extensis/Portfolio\ Server/applications/jboss/standalone/deployments
+export UPLOAD_FORM_DIR_NAME=dist
 
 $DAMSTER -adminlogin;
 $DAMSTER -stopserver;
 
-cd "$PUBLISH_HOME";
+cd "$UPLOAD_FORM_HOME";
 gulp dist;
 
 cd "$PORT_BUILD";
@@ -22,8 +22,8 @@ mkdir explode && cd explode;
 jar xf ../portfolio.ear;
 mkdir explode && cd explode;
 jar xf ../portfolio.war;
-rm -rf publishsite;
-cp -R "$PUBLISH_HOME/dist" publishsite;
+rm -rf $UPLOAD_FORM_DIR_NAME;
+cp -R "$UPLOAD_FORM_HOME/dist" $UPLOAD_FORM_DIR_NAME;
 rm ../portfolio.war;
 jar cf ../portfolio.war *;
 cd ..;
@@ -37,4 +37,3 @@ rm -f portfolio.ear;
 cp "$PORT_BUILD/portfolio.ear" .;
 sleep 7;
 $DAMSTER -startserver;
-

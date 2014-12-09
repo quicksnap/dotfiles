@@ -63,6 +63,7 @@ update_jars() {
   cd /Users/dan/projects/portfolio/dam-server/build/dist/;
   ./mac-devtools.sh update_jboss_jars;
   popd
+  sleep 5
   damster -startserver;
 }
 

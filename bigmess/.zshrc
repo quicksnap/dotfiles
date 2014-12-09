@@ -52,7 +52,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/dan/bin:/Users/dan/projects/p4/danschuman_perforce/ThirdPartySource/apache/ant/1.9.0/bin"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/dan/bin:/Users/dan/projects/apache-ant/1.9.0/bin"
 export PATH=/usr/local/bin:$PATH
 export PATH=$(brew --prefix ruby)/bin:$PATH
 export PATH=$PATH:"/Users/dan/bin/depot_tools"
@@ -64,7 +64,7 @@ export P4CLIENT="danschuman_perforce"
 export P4CHARSET="utf8"
 export P4USER="dschuman"
 export P4PASSWORD=""
-export ANT_HOME=/Users/dan/projects/p4/danschuman_perforce/ThirdPartySource/apache/ant/1.9.0
+export ANT_HOME=/Users/dan/projects/apache-ant/1.9.0
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
