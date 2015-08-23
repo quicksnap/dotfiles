@@ -1,13 +1,11 @@
+alias co="git checkout"
+
 editalias() {
   subl -nw ~/.aliases && . ~/.aliases
 }
 
-alias g4upstream="P4CLIENT=fresh_and_clean g4 submit"
-
 alias nower="npm i && bower i"
 alias gs='git status'
-
-alias nw="/Applications/node-webkit.app/Contents/MacOS/node-webkit"
 
 alias ,="subl ."
 
@@ -19,38 +17,9 @@ alias g4="git p4"
 
 alias g4s="git p4 submit --prepare-p4-only"
 
-portbuild() {
-  read 'foobar?DID YOU SUBMIT TO P4??';
-  sudo true;
-  cd /Users/dan/projects/portfolio/dam-server/;
-  ant;
-  cd build/dist;
-  sudo ./mac-devtools.sh remove delete_db install;
-  popd;
-  popd;
-}
-
-portbuildbig() {
-  read 'foobar?DID YOU SUBMIT TO P4??';
-  sudo true;
-  cd /Users/dan/projects/portfolio/dam-server/;
-  cd /Users/dan/projects/portfolio/dam-server/client/client-library && ant;
-  popd;
-  cd /Users/dan/projects/portfolio/dam-server/;
-  ant;
-  cd build/dist;
-  sudo ./mac-devtools.sh remove delete_db install;
-  popd;
-  popd;
-}
-
-alias posty="cd; post-review -o default; popd;"
-
 alias damster="~/projects/portfolio/dam-server/client/damster/build/dist/damster.sh"
 
 alias ll="ls -alh"
-
-alias getlatest="p4 sync /Users/dan/projects/p4/danschuman_perforce/ExtensisSource/dev/portfolio/...#head"
 
 update_jars() {
   sudo true;
@@ -63,7 +32,8 @@ update_jars() {
   cd /Users/dan/projects/portfolio/dam-server/build/dist/;
   ./mac-devtools.sh update_jboss_jars;
   popd
-  sleep 5
+  sleep 20
+  damster -startserver;
   damster -startserver;
 }
 
@@ -71,14 +41,15 @@ update_ear() {
   sudo true;
   damster -adminlogin;
   damster -stopserver;
-  sleep 5;
   cd /Users/dan/projects/portfolio/dam-server/;
-  ant ear;
-  sleep 10;
+  ant fast-dist;
   sudo rm /Applications/Extensis/Portfolio\ Server/applications/jboss/standalone/deployments/portfolio.ear;
   sudo cp -rf /Users/dan/projects/portfolio/dam-server/build/portfolio.ear /Applications/Extensis/Portfolio\ Server/applications/jboss/standalone/deployments/portfolio.ear;
   damster -startserver;
-  popd;
+  damster -startserver;
+}
+earupdate() {
+  update_ear;
 }
 
 _update_ear_nobuild() {
@@ -99,6 +70,10 @@ mdevtools() {
   cd /Users/dan/projects/portfolio/dam-server/build/dist;
   ./mac-devtools.sh $@;
   popd;
+}
+
+gonuts() {
+  (cd /Users/dan/projects/portfolio/dam-native && ant) && (cd /Users/dan/projects/portfolio/dam-server && ant && macdevremove)
 }
 
 alias fuckyou="echo 'No, fuck you.'"
@@ -124,3 +99,11 @@ alias .............="../../../../../../.."
 alias ..............="../../../../../../.."
 alias ...............="../../../../../../../.."
 alias ................="../../../../../../../.."
+
+alias gd="git icdiff"
+
+alias macdevremove="cd /Users/dan/projects/portfolio/dam-server/build/dist; sudo ./mac-devtools.sh remove && sudo ./mac-devtools.sh install; popd;"
+
+alias p="ps axco user,pid,command"
+
+alias gitwip="(cd "$(git rev-parse --show-toplevel)" && git add -A :/ && git commit -am 'WIP')"

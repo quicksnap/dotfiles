@@ -1,0 +1,16 @@
+#!/bin/bash
+
+productInstallFolder="Portfolio Server"
+
+if [ "external" == "$1" ]; then
+  productInstallFolder="Portfolio/Media Engine"
+fi
+
+enginePath="/Applications/Extensis/$productInstallFolder/applications"
+
+plist="/Library/LaunchDaemons/com.extensis.portfolio.server.media.delegate.plist"
+sudo launchctl unload "$plist"
+sudo rm -r "$enginePath/tomcat/servers/media-delegate/webapps"/portfolio-media-processor*
+cp $HOME/projects/portfolio/dam-server/build/portfolio-media-processor.war "$enginePath/tomcat/servers/media-delegate/webapps/"
+sudo launchctl load "$plist"
+

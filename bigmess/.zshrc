@@ -66,6 +66,9 @@ export P4USER="dschuman"
 export P4PASSWORD=""
 export ANT_HOME=/Users/dan/projects/apache-ant/1.9.0
 
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # # Preferred editor for local and remote sessions
@@ -88,3 +91,5 @@ source ~/.npmCompletion
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
 source /Users/dan/bin/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+
+source /Users/dan/.iterm2_shell_integration.zsh
