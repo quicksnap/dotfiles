@@ -8,6 +8,7 @@ alias nower="npm i && bower i"
 alias gs='git status'
 
 alias ,="subl ."
+alias ,,="open ."
 
 alias zshrc="subl ~/.zshrc"
 

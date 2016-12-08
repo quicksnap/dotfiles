@@ -5,17 +5,17 @@
 set -e
 
 export PORTFOLIO_HOME=/Users/dan/projects/portfolio
-export UPLOAD_FORM_HOME="$PORTFOLIO_HOME"/dam-server/client/ingest-form
+export UPLOAD_FORM_HOME="$PORTFOLIO_HOME"/dam-server/client/publish-form
 export PORT_BUILD="$PORTFOLIO_HOME"/dam-server/build
 export DAMSTER="$PORTFOLIO_HOME"/dam-server/client/damster/build/dist/damster.sh
 export EAR_DIR=/Applications/Extensis/Portfolio\ Server/applications/jboss/standalone/deployments
-export UPLOAD_FORM_DIR_NAME=dist
+export UPLOAD_FORM_DIR_NAME=publishsite
 
 $DAMSTER -adminlogin;
 $DAMSTER -stopserver;
 
-cd "$UPLOAD_FORM_HOME";
-grunt build;
+# cd "$UPLOAD_FORM_HOME";
+# grunt build;
 
 cd "$PORT_BUILD";
 mkdir explode && cd explode;

@@ -58,6 +58,7 @@ export PATH=$(brew --prefix ruby)/bin:$PATH
 export PATH=$PATH:"/Users/dan/bin/depot_tools"
 export GOPATH=$HOME/projects/go
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$HOME/.cargo/bin
 
 export P4PORT="perforce.extensis.com:1666"
 export P4CLIENT="danschuman_perforce"
@@ -85,7 +86,7 @@ source $(brew --prefix nvm)/nvm.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 source ~/.aliases
-source ~/.gitflowcomplete.zsh
+#source ~/.gitflowcomplete.zsh
 source ~/.npmCompletion
 
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
@@ -93,3 +94,4 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 source /Users/dan/bin/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
 source /Users/dan/.iterm2_shell_integration.zsh
+
